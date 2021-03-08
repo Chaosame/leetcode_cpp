@@ -68,6 +68,8 @@ public:
         //4对于左针如果右边的最大值已经大于它,根据2我们就可以确定这块的蓄水量
         //5对于4的反面,我们无法确定左针但是我们此时右针的最大是小于左针最大 我们可以确定右针的蓄水量
         //6由此得到双指针写法
+
+        //这种写法时间O(n) 空间O(1) 应是本题最优解
         int n = height.size();
         if(n==0){
             return 0;
@@ -78,11 +80,16 @@ public:
         int l_max = height[l];
         int r_max = height[r];
         while(l<r){ // 两指针相遇停止
-            l_max = max(height[l],l_max);
-            r_max = max(height[r],r_max);
-            if l_max
+            if (height[l]<height[r]){
+               height[l]>l_max?(l_max = height[l]):ans+=l_max-height[l];
+               l++;
+            }
+            else{
+               height[r]>r_max?(r_max = height[r]):ans+=r_max-height[r];
+               r--;
+            }
         }
-
+        return ans;
     }
 };
 // @lc code=end
