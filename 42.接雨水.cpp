@@ -80,12 +80,14 @@ public:
         int l_max = height[l];
         int r_max = height[r];
         while(l<r){ // 两指针相遇停止
-            if (height[l]<height[r]){
-               height[l]>l_max?(l_max = height[l]):ans+=l_max-height[l];
+            l_max= max(l_max,height[l]);
+            r_max =max(r_max,height[r]);
+            if (l_max<r_max){
+               ans+=l_max-height[l];
                l++;
             }
             else{
-               height[r]>r_max?(r_max = height[r]):ans+=r_max-height[r];
+               ans+=r_max-height[r];
                r--;
             }
         }
