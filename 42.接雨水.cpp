@@ -61,7 +61,28 @@
 class Solution {
 public:
     int trap(vector<int>& height) { 
-        //双指针写法 
+        //双指针写法
+        //1这道题一个位置的蓄水量显然和两边都有关系
+        //2蓄水量取决于左边的最大值和右边的最大值中的较小值
+        //3我们可以用两个指针一个从左一个从右进行计算
+        //4对于左针如果右边的最大值已经大于它,根据2我们就可以确定这块的蓄水量
+        //5对于4的反面,我们无法确定左针但是我们此时右针的最大是小于左针最大 我们可以确定右针的蓄水量
+        //6由此得到双指针写法
+        int n = height.size();
+        if(n==0){
+            return 0;
+        }
+        int l = 0;
+        int r = n-1;
+        int ans = 0;
+        int l_max = height[l];
+        int r_max = height[r];
+        while(l<r){ // 两指针相遇停止
+            l_max = max(height[l],l_max);
+            r_max = max(height[r],r_max);
+            if l_max
+        }
+
     }
 };
 // @lc code=end
