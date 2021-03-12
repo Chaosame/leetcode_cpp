@@ -29,6 +29,24 @@ void partition(vector<int>& nums,int start,int end){
     partition(nums,start,l-1);
     partition(nums,l+1,end);
 }
+/**
+ * 快排模板，这里的每一个变量，每个符号都不能随意改变。
+ * @param q
+ * @param l  闭区间的左端点
+ * @param r  闭区间的右端点
+ */
+void quick_sort(int q[], int l, int r) {
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, x = q[l + r >> 1];
+    while (i < j) {
+       do i ++;  while (q[i] < x);
+       do j --;  while (q[j] > x);
+        if (i < j) swap(q[i], q[j]);
+    }
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
+}
+
 
 
 int main(){

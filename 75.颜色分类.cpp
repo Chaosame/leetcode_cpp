@@ -7,33 +7,20 @@
 // @lc code=start
 class Solution {
 public:
-void partition(vector<int>& nums,int start,int end){
-    if (start>=end){
-        return;
+void quick_sort(vector<int>& q, int l, int r) {
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, x = q[l + r >> 1];
+    while (i < j) {
+       do i ++;  while (q[i] < x);
+       do j --;  while (q[j] > x);
+        if (i < j) swap(q[i], q[j]);
     }
-    int l = start;
-    int r = end;//左闭右闭
-    int target = nums[l];
-    while(l<r){
-        while(l<r&&nums[r]>=target){
-            r--;
-        }
-        while(l<r&&nums[l]<=target){
-            l++;
-        }
-        if (r > l) { //
-            swap(nums[l], nums[r]);
-        }
-    }
-    
-    nums[start] = nums[l];
-    nums[l] = target;
-    partition(nums,start,l-1);
-    partition(nums,l+1,end);
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
 }
 
     void sortColors(vector<int>& nums) {
-        partition(nums,0,nums.size()-1);
+        quick_sort(nums,0,nums.size()-1);
     }
 };
 // @lc code=end
