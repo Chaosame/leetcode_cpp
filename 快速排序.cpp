@@ -47,11 +47,34 @@ void quick_sort(int q[], int l, int r) {
     quick_sort(q, j + 1, r);
 }
 
+void quicksort(vector<int> nums,int l,int r){
+    if(l>=r) return;//下标相等位置已经确定了不用排
+    int i=l-1 , j=r+1, mid = nums[i+j>>1];
+    while(i<j){
+        do i++;while(nums[i]<mid);
+        do j--;while(nums[i]>mid);
+        if(i<j) swap(nums[i],nums[j]); // ij依然有效则进行交换
+    }
+    quicksort(nums,l,j);
+    quicksort(nums,j+1,r);
+}
+//撸个快排
+void qs(vector<int>nums,int i,int j){
+    if(i>=j) return;
+    int l=i-1,r=j+1,m=(l+r)>>1;
+    while(l<r){
+        do l--;while(nums[i]<nums[m]);
+        do r++;while(nums[i]>nums[m]);
+        if(r>l) swap(nums[l],nums[r]);
+    }
+    qs(nums,i,l);
+    qs(nums,r+1,j);
+}
 
 
 int main(){
     int n = a.size()-1;
-    partition(a,0,n-1);
+    quicksort(a,0,n-1);
     for (int i=0;i<n;i++){
         cout<<a[i]<<endl;
     }
